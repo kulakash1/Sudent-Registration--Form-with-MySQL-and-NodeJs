@@ -1,0 +1,13 @@
+<h1>Update Student Registeration Details</h1>
+    <form action="" method="post">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" value="<%= student[0].name %>" placeholder="Enter Your Name" required><br><br>
+        
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" value="<%= student[0].email %>" placeholder="Enter Email" required><br><br>
+        
+        <label for="mobile">Mobile Number:</label><br>
+        <input type="tel" id="mobile" name="mno" value="<%= student[0].mno %>" placeholder="Enter Mobile No." required><br><br>
+        
+        <input type="submit" value="Submit">
+    </form>
