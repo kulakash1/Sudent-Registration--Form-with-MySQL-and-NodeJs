@@ -62,10 +62,28 @@ app.get('/delete-student', function(req,res){
 
 
 app.get('/update-student', function(req,res){
-    var id = req.query.id;
     var sql = "SELECT * FROM students WHERE id=?";
+    var id = req.query.id;
+
     con.query(sql, [id], function(err, result){
         if(err) throw err;
         res.render(__dirname+"/update-student.ejs", {students:result});
     });
 });
+
+app.post('/update-student', function(req,res){
+    var name = req.body.name;
+    var email = req.body.email;
+    var mno = req.body.mno;
+    var id = req.body.id;
+    
+            // var sql = "INSERT INTO students(name,email,mno) VALUES('"+name+"','"+email+"','"+mno+"')";
+            var sql = "UPDATE students set name=?,email=?,mno=? where id=?";
+            
+            con.query(sql,[name,email,mno,id], function(error,result){
+                if(error) throw error;
+                res.redirect('/students');
+                // else res.send("Student Registration Successfull"+result.insertId);
+            });
+
+})
