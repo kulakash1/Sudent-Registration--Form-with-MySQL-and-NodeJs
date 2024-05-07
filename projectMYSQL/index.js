@@ -20,10 +20,6 @@ app.post('/', function(req,res){
     var email = req.body.email;
     var mno = req.body.mno;
     
-    con.connect(function(error){
-        if(error) throw error;
-        else
-        {
             // var sql = "INSERT INTO students(name,email,mno) VALUES('"+name+"','"+email+"','"+mno+"')";
             var sql = "INSERT INTO students(name,email,mno) VALUES ?";
             var values = [
@@ -35,38 +31,24 @@ app.post('/', function(req,res){
                 res.redirect('/students');
                 // else res.send("Student Registration Successfull"+result.insertId);
             });
-        } 
-
-    });
 
 })
 
 
 app.get('/students', function(req,res){
-
-    con.connect(function(error){
-        if(error) throw error;
-        else
-        {
+    
             var sql = "SELECT * FROM students";
             
             con.query(sql, function(error,result){
                 if(error) throw error;
                 else res.render(__dirname+"/students.ejs",{students:result});
             });
-        } 
-
-    });
 
 });
 
 
 app.get('/delete-student', function(req,res){
 
-    con.connect(function(error){
-        if(error) throw error;
-        else
-        {
             var sql = "delete FROM students where id=?";
             var id = req.query.id;
 
@@ -74,9 +56,7 @@ app.get('/delete-student', function(req,res){
                 if(error) throw error;
                 else res.redirect('/students');
             });
-        } 
-
-    });
+         
 
 });
 
@@ -89,24 +69,3 @@ app.get('/update-student', function(req,res){
         res.render(__dirname+"/update-student.ejs", {students:result});
     });
 });
-// app.get('/update-student', function(req,res){
-
-//     con.connect(function(error){
-//         if(error) throw error;
-//         else
-//         {
-//             var sql = "SELECT * FROM students where id=?";
-//             var id = req.query.id;
-
-//             con.query(sql,[id], function(error,result){
-//                 if(error) throw error;
-//                 else res.render(__dirname+"/update-student.ejs"+{students:result});
-//             });
-//         } 
-
-//     });
-
-// });
-
-
-
