@@ -5,9 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student List</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
         table {
-            width: 100%;
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
             border-collapse: collapse;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         th, td {
             border: 1px solid #dddddd;
@@ -16,11 +30,31 @@
         }
         th {
             background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+        td:last-child a {
+            margin-left: 5px;
+            text-decoration: none;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 3px;
+            transition: background-color 0.3s ease;
+        }
+        td:last-child a:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <h1>Student List</h1>
+    <% if(students.length > 0) { %>
     <table>
         <tr>
             <th>Sr. No</th>
@@ -29,23 +63,21 @@
             <th>Mobile</th>
             <th>Action</th>
         </tr>
-        <% if(students.length >0 ) { %>
-            <% for(var i=0; i<students.length; i++) { %>
-                <tr>
-                    <td><%- students[i].id %></td>
-                    <td><%- students[i].name %></td>
-                    <td><%- students[i].email %></td>
-                    <td><%- students[i].mno %></td>
-                    <td>
-                        <a href="/delete-student?id=<%- students[i].id %>">Delete</a>
-                        <a href="/update-student?id=<%- students[i].id %>">Update</a>
-                    </td>
-                </tr>
-                <% } %>
-        <% } else {  %>
-            <h1>Students Data Not found</h1>
-            <%  } %>
-        
+        <% for(var i=0; i<students.length; i++) { %>
+        <tr>
+            <td><%- students[i].id %></td>
+            <td><%- students[i].name %></td>
+            <td><%- students[i].email %></td>
+            <td><%- students[i].mno %></td>
+            <td>
+                <a href="/delete-student?id=<%- students[i].id %>">Delete</a>
+                <a href="/update-student?id=<%- students[i].id %>">Update</a>
+            </td>
+        </tr>
+        <% } %>
     </table>
+    <% } else {  %>
+        <h2 style="text-align: center;">Students Data Not found</h2>
+    <% } %>
 </body>
 </html>
